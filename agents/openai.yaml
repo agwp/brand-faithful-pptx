@@ -1,0 +1,4 @@
+interface:
+  display_name: "Brand Faithful PPTX"
+  short_description: "Preserve PowerPoint branding and native charts"
+  default_prompt: "Use $brand-faithful-pptx to create a corporate-brand-compliant PowerPoint deck with editable native charts."
