@@ -8,6 +8,12 @@ Many AI tools create slides by drawing new shapes, choosing new colors, or expor
 
 The result should be a deck that feels like it belongs to the organization that owns the template. A future editor should be able to open the file in PowerPoint, reuse normal slide layouts, and right-click a chart to edit its data in Excel instead of being stuck with a static SVG, PNG, or screenshot.
 
+## Recommended set up for local use
+
+1. Download this repo to use locally.
+2. Add your approved PowerPoint deck into the `/references` folder.
+3. Direct your local AI app to this folder to install the skill with your PowerPoint template.
+
 ## Attribution
 
 This skill is built around the Python `python-pptx` library, created and maintained by Steve Canny and contributors. Project source: https://github.com/scanny/python-pptx
