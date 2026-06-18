@@ -7,7 +7,7 @@ description: Create, edit, repair, and automate professional PowerPoint .pptx de
 
 ## Core Rule
 
-Build from the user's PowerPoint template or existing branded deck whenever one is available:
+Build from the user's PowerPoint template (check /references folder) or existing branded deck whenever one is available:
 
 ```python
 from pptx import Presentation
