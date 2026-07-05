@@ -23,6 +23,17 @@ Do not recreate the visual system from scratch. Use the template's slide masters
    - Run `scripts/inspect_template.py TEMPLATE.pptx --format markdown` to list layouts and placeholder `idx` values.
    - Choose layouts by name/placeholder structure, not by hard-coded index unless the template audit proves the index.
 
+### Binary-hostile agent fallback
+
+Some agents, chat clients, and review tools corrupt or ignore binary `.pptx` attachments. A `.pptx` is a ZIP archive, so when binary handling is unreliable, ask the user to provide either the original `.pptx` or an unpacked package directory/ZIP made from it. Use the helper script to round-trip safely:
+
+```bash
+python scripts/pptx_package.py unpack template.pptx references/template-package --force
+python scripts/pptx_package.py pack references/template-package rebuilt-template.pptx --force
+```
+
+When working from an unpacked package, treat XML and relationship files as source material for inspection or repair, then repack before running `python-pptx` tools. Never copy `.pptx` bytes through text channels, JSON strings, or markdown fences; use filesystem paths, attachments, or the unpacked package workflow instead.
+
 2. Add content through placeholders first.
    - Set titles via `slide.shapes.title.text` when present.
    - Access known placeholders with `slide.placeholders[idx]`; `idx` is stable for that layout.
@@ -48,6 +59,8 @@ Do not recreate the visual system from scratch. Use the template's slide masters
 
 ```bash
 python scripts/inspect_template.py template.pptx --format markdown
+python scripts/pptx_package.py unpack template.pptx references/template-package --force
+python scripts/pptx_package.py pack references/template-package rebuilt-template.pptx --force
 python scripts/example_native_chart_deck.py --template template.pptx --output sample-native-chart.pptx
 python scripts/verify_native_charts.py sample-native-chart.pptx
 ```
