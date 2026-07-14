@@ -52,18 +52,32 @@ def _iter_files(root: Path):
         yield path
 
 
+def _require_path_outside_directory(path: Path, directory: Path, label: str) -> None:
+    resolved_directory = directory.resolve()
+    locations = (path.resolve(), path.parent.resolve() / path.name)
+    for location in locations:
+        try:
+            location.relative_to(resolved_directory)
+        except ValueError:
+            continue
+        raise ValueError(f"{label} must not be inside the input directory: {path}")
+
+
 def pack_pptx(input_dir: Path, pptx_path: Path, force: bool = False) -> None:
     required = [input_dir / "[Content_Types].xml", input_dir / "ppt" / "presentation.xml"]
     missing = [str(path) for path in required if not path.exists()]
     if missing:
         raise FileNotFoundError("input directory is not an unpacked .pptx package; missing " + ", ".join(missing))
 
+    tmp_path = pptx_path.with_suffix(pptx_path.suffix + ".tmp")
+    _require_path_outside_directory(pptx_path, input_dir, "output file")
+    _require_path_outside_directory(tmp_path, input_dir, "temporary output file")
+
     if pptx_path.exists() and not force:
         raise FileExistsError(f"output file already exists: {pptx_path}")
     pptx_path.parent.mkdir(parents=True, exist_ok=True)
 
-    tmp_path = pptx_path.with_suffix(pptx_path.suffix + ".tmp")
-    if tmp_path.exists():
+    if tmp_path.exists() or tmp_path.is_symlink():
         tmp_path.unlink()
 
     try:
