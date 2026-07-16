@@ -69,3 +69,21 @@ for shape in slide.shapes:
 ## Styling posture
 
 Use the template's chart style unless the task requires a specific style. Light-touch chart properties such as legend position, data labels, axis titles, and number formats are appropriate; rebuilding colors by hand is usually a sign that the template is not being used well.
+
+## Handling `.pptx` files with binary-hostile agents
+
+PowerPoint `.pptx` files are ZIP archives containing XML parts, relationship
+files, embedded media, and embedded workbook data. If an agent or review channel
+cannot reliably preserve binary files, do not paste or serialize the `.pptx`
+contents through text. Instead, unpack the deck to a directory, inspect or edit
+that directory, and repack it before using `python-pptx`:
+
+```bash
+python scripts/pptx_package.py unpack template.pptx references/template-package --force
+python scripts/pptx_package.py pack references/template-package rebuilt-template.pptx --force
+```
+
+This workflow is useful when a user can share a ZIP attachment containing the
+expanded package but the agent cannot safely ingest the original `.pptx`. After
+repacking, run the normal inspection and chart verification scripts against the
+rebuilt `.pptx`.
