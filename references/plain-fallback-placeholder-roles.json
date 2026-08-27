@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "overrides": {
+    "6:11": {
+      "layout_name": "Agenda with progress indicator",
+      "placeholder_name": "Section label 11",
+      "content_role": "section_label",
+      "content_class": "optional_supporting",
+      "note": "Use only for a supplied or functionally required current-section label."
+    },
+    "9:10": {
+      "layout_name": "Numbered chapter divider",
+      "placeholder_name": "Section label 10",
+      "content_role": "section_label",
+      "content_class": "optional_supporting",
+      "note": "Use only for an actual chapter or section number."
+    },
+    "16:10": {
+      "layout_name": "Title and content slide",
+      "placeholder_name": "Editable content 10",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary supplied content region; it is not a requirement to add text."
+    },
+    "17:11": {
+      "layout_name": "Title, subtitle and content slide",
+      "placeholder_name": "Editable content 11",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary supplied content region; it is not a requirement to add text."
+    },
+    "19:11": {
+      "layout_name": "Title with left third and right two-thirds",
+      "placeholder_name": "Editable content 11",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary supplied content region for text, data, image, table, or diagram."
+    },
+    "20:10": {
+      "layout_name": "Title with left two-thirds and right third",
+      "placeholder_name": "Editable content 10",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary supplied content region for text, data, image, table, or diagram."
+    },
+    "28:10": {
+      "layout_name": "Quotation slide",
+      "placeholder_name": "Quote 10",
+      "content_role": "quote",
+      "content_class": "optional_supporting",
+      "note": "Use only for a supplied quotation."
+    },
+    "28:11": {
+      "layout_name": "Quotation slide",
+      "placeholder_name": "Attribution 11",
+      "content_role": "attribution",
+      "content_class": "optional_supporting",
+      "note": "Use only for the supplied quotation's factual attribution."
+    },
+    "29:11": {
+      "layout_name": "Quotation with portrait",
+      "placeholder_name": "Quote 11",
+      "content_role": "quote",
+      "content_class": "optional_supporting",
+      "note": "Use only for a supplied quotation."
+    },
+    "29:12": {
+      "layout_name": "Quotation with portrait",
+      "placeholder_name": "Attribution 12",
+      "content_role": "attribution",
+      "content_class": "optional_supporting",
+      "note": "Use only for the supplied quotation's factual attribution."
+    },
+    "46:11": {
+      "layout_name": "Annotated-screenshot slide",
+      "placeholder_name": "Callout 11",
+      "content_role": "callout",
+      "content_class": "optional_supporting",
+      "note": "Use only for factual annotations supported by the supplied screenshot or source."
+    },
+    "67:10": {
+      "layout_name": "Treemap slide",
+      "placeholder_name": "Editable content 10",
+      "content_role": "non_text",
+      "content_class": "non_text",
+      "note": "Editable visual region; the example uses native PowerPoint shapes."
+    },
+    "68:10": {
+      "layout_name": "Heatmap slide",
+      "placeholder_name": "Editable content 10",
+      "content_role": "non_text",
+      "content_class": "non_text",
+      "note": "Editable visual region; the example uses native PowerPoint shapes and labels."
+    },
+    "69:10": {
+      "layout_name": "Geographic-map slide",
+      "placeholder_name": "Editable content 10",
+      "content_role": "non_text",
+      "content_class": "non_text",
+      "note": "Editable visual region; the example uses native PowerPoint region tiles."
+    },
+    "71:11": {
+      "layout_name": "Chart with takeaway panel",
+      "placeholder_name": "Callout 11",
+      "content_role": "callout",
+      "content_class": "optional_supporting",
+      "note": "Use only for a conclusion directly supported by the chart data."
+    }
+  }
+}

@@ -2,6 +2,17 @@
 
 All recipes create editable PowerPoint charts with embedded Excel workbook data. Import only the chart-data class that matches the chart type.
 
+## Restrained chart defaults
+
+- Do not add a chart title when the slide title already identifies the measure.
+- Do not add axis titles unless the units or measure would otherwise be ambiguous.
+- Remove major and minor gridlines by default.
+- For columns, bars, and ranked charts, use direct value labels and hide the value axis when the labels carry the complete scale.
+- Put labels outside the end of ordinary columns and bars; put them inside pie, donut, and stacked segments when they remain legible.
+- Keep axes for line, area, combination, scatter, and bubble charts when the audience needs the continuous scale.
+- Keep a legend only when multiple series cannot be identified directly. Never show a legend that duplicates direct labels.
+- Do not use 3-D effects, decorative backgrounds, shadows, or images as chart substitutes.
+
 ## Category column or bar chart
 
 ```python

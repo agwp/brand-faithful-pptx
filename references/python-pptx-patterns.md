@@ -8,6 +8,8 @@
 
 `python-pptx` treats a presentation as a package of parts. Most design information lives in the theme, slide masters, and slide layouts that remain even when a deck has no slides. Starting from `Presentation(template_path)` preserves those parts.
 
+`python-pptx` can read and reuse slide masters and layouts, but its public API cannot create them. The repository's plain fallback catalog therefore creates its 100 layout parts as OOXML first, then reopens that package with `python-pptx` to add examples through the genuine layouts. Do not use that fallback catalog automatically; it requires explicit user approval after the official template has been audited.
+
 ## Layout selection
 
 Audit the template before adding slides:
@@ -72,18 +74,11 @@ Use the template's chart style unless the task requires a specific style. Light-
 
 ## Handling `.pptx` files with binary-hostile agents
 
-PowerPoint `.pptx` files are ZIP archives containing XML parts, relationship
-files, embedded media, and embedded workbook data. If an agent or review channel
-cannot reliably preserve binary files, do not paste or serialize the `.pptx`
-contents through text. Instead, unpack the deck to a directory, inspect or edit
-that directory, and repack it before using `python-pptx`:
+PowerPoint `.pptx` files are ZIP archives containing XML parts, relationship files, embedded media, and embedded workbook data. If an agent or review channel cannot reliably preserve binary files, do not paste or serialize the `.pptx` contents through text. Instead, unpack the deck to a directory, inspect or edit that directory, and repack it before using `python-pptx`:
 
 ```bash
 python scripts/pptx_package.py unpack template.pptx references/template-package --force
 python scripts/pptx_package.py pack references/template-package rebuilt-template.pptx --force
 ```
 
-This workflow is useful when a user can share a ZIP attachment containing the
-expanded package but the agent cannot safely ingest the original `.pptx`. After
-repacking, run the normal inspection and chart verification scripts against the
-rebuilt `.pptx`.
+This workflow is useful when a user can share a ZIP attachment containing the expanded package but the agent cannot safely ingest the original `.pptx`. After repacking, run the normal inspection and chart verification scripts against the rebuilt `.pptx`.
