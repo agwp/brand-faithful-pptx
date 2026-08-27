@@ -61,6 +61,7 @@ WORKBOOK_CONTENT_TYPE = (
 EXPECTED_LAYOUT_NAMES = tuple(name for _, name, _ in LAYOUT_ROWS)
 NATIVE_CHART_LAYOUTS = frozenset(range(49, 68)) | {72}
 EDITABLE_DATA_LAYOUTS = frozenset({68, 69, 70, 71})
+DESCENDING_BAR_LAYOUTS = frozenset({54, 55, 56, 57, 58, 67})
 
 # Expected plot structure produced by build_plain_fallback_deck.py.  The first
 # value is the plot tag and the optional following values are barDir/grouping.
@@ -223,6 +224,56 @@ def _check_plot_contract(
         )
 
 
+def _check_descending_bar_order(
+    slide_number: int,
+    chart_part: str,
+    chart_root: etree._Element,
+    errors: list[str],
+) -> None:
+    if slide_number not in DESCENDING_BAR_LAYOUTS:
+        return
+
+    category_axes = chart_root.findall(".//c:catAx", NS)
+    orientations = [
+        axis.find("c:scaling/c:orientation", NS) for axis in category_axes
+    ]
+    if len(category_axes) != 1 or any(
+        orientation is None or orientation.get("val") != "maxMin"
+        for orientation in orientations
+    ):
+        errors.append(
+            f"Slide {slide_number} horizontal bar chart must reverse its category axis "
+            "so the highest value appears at the top"
+        )
+
+    series_values: list[list[float]] = []
+    for series in chart_root.findall(".//c:barChart/c:ser", NS):
+        points = series.findall("c:val/c:numRef/c:numCache/c:pt", NS)
+        if not points:
+            points = series.findall("c:val/c:numLit/c:pt", NS)
+        indexed_values = []
+        for point in points:
+            value = point.find("c:v", NS)
+            if value is None or value.text is None:
+                continue
+            indexed_values.append((int(point.get("idx", "0")), float(value.text)))
+        if indexed_values:
+            indexed_values.sort()
+            series_values.append([value for _, value in indexed_values])
+
+    if not series_values or len({len(values) for values in series_values}) != 1:
+        errors.append(
+            f"Slide {slide_number} horizontal bar chart has incomplete cached values"
+        )
+        return
+    category_totals = [sum(values) for values in zip(*series_values)]
+    if category_totals != sorted(category_totals, reverse=True):
+        errors.append(
+            f"Slide {slide_number} horizontal bar categories are not sorted "
+            f"highest-to-lowest: {category_totals!r}"
+        )
+
+
 def _check_chart_part(
     slide_number: int,
     chart_part: str,
@@ -252,6 +303,7 @@ def _check_chart_part(
         errors.append(f"Slide {slide_number} chart {chart_part} contains an embedded image")
 
     _check_plot_contract(slide_number, chart_part, chart_root, errors)
+    _check_descending_bar_order(slide_number, chart_part, chart_root, errors)
 
     external_data = chart_root.findall(".//c:externalData", NS)
     if len(external_data) != 1:

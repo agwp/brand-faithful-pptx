@@ -8,6 +8,7 @@ All recipes create editable PowerPoint charts with embedded Excel workbook data.
 - Do not add axis titles unless the units or measure would otherwise be ambiguous.
 - Remove major and minor gridlines by default.
 - For columns, bars, and ranked charts, use direct value labels and hide the value axis when the labels carry the complete scale.
+- Sort horizontal bar categories by the relevant value or stacked total, highest to lowest, and reverse the category axis so the largest bar appears at the top of the slide.
 - Put labels outside the end of ordinary columns and bars; put them inside pie, donut, and stacked segments when they remain legible.
 - Keep axes for line, area, combination, scatter, and bubble charts when the audience needs the continuous scale.
 - Keep a legend only when multiple series cannot be identified directly. Never show a legend that duplicates direct labels.

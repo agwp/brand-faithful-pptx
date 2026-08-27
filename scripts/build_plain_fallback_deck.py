@@ -72,6 +72,7 @@ GREEN = RGBColor(0x2E, 0x8B, 0x57)
 AMBER = RGBColor(0xD9, 0x7B, 0x29)
 RED = RGBColor(0xC6, 0x3C, 0x43)
 SERIES_COLORS = (BLUE, NAVY, GREEN, AMBER, RED)
+DESCENDING_BAR_LAYOUTS = frozenset({54, 55, 56, 57, 58, 67})
 
 
 @dataclass(frozen=True)
@@ -1063,6 +1064,11 @@ def style_chart(chart, number: int) -> None:
     try:
         chart.category_axis.has_title = False
         chart.category_axis.has_major_gridlines = False
+        if number in DESCENDING_BAR_LAYOUTS:
+            # PowerPoint renders the first bar category at the bottom by default.
+            # The source data is already ranked high-to-low, so reverse the
+            # category axis to keep the largest value or stacked total on top.
+            chart.category_axis.reverse_order = True
     except (AttributeError, ValueError):
         pass
 

@@ -175,6 +175,41 @@ class PlainFallbackVerifierTests(unittest.TestCase):
         self.assert_has_error(report, "contains a chart or axis title")
         self.assert_has_error(report, "contains major gridlines")
 
+    def test_horizontal_bar_axis_must_put_highest_value_at_top(self) -> None:
+        def mutate(parts: dict[str, bytes]) -> None:
+            name = "ppt/charts/chart6.xml"
+            root = etree.fromstring(parts[name])
+            orientation = root.find(".//c:catAx/c:scaling/c:orientation", NS)
+            orientation.set("val", "minMax")
+            parts[name] = etree.tostring(
+                root, xml_declaration=True, encoding="UTF-8", standalone=True
+            )
+
+        report = self.inspect_mutation(mutate)
+        self.assert_has_error(
+            report,
+            "horizontal bar chart must reverse its category axis",
+        )
+
+    def test_horizontal_bar_values_must_be_sorted_descending(self) -> None:
+        def mutate(parts: dict[str, bytes]) -> None:
+            name = "ppt/charts/chart6.xml"
+            root = etree.fromstring(parts[name])
+            last_value = root.find(
+                ".//c:barChart/c:ser[1]/c:val/c:numRef/c:numCache/c:pt[@idx='3']/c:v",
+                NS,
+            )
+            last_value.text = "99"
+            parts[name] = etree.tostring(
+                root, xml_declaration=True, encoding="UTF-8", standalone=True
+            )
+
+        report = self.inspect_mutation(mutate)
+        self.assert_has_error(
+            report,
+            "horizontal bar categories are not sorted highest-to-lowest",
+        )
+
     def test_missing_chart_workbook_is_rejected(self) -> None:
         def mutate(parts: dict[str, bytes]) -> None:
             parts.pop("ppt/embeddings/Microsoft_Excel_Sheet1.xlsx")
