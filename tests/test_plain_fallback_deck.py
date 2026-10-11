@@ -324,6 +324,31 @@ class PlainFallbackVerifierTests(unittest.TestCase):
         report = self.inspect_mutation(mutate)
         self.assert_has_error(report, "resolves to missing part")
 
+    def test_typed_in_data_label_is_rejected(self) -> None:
+        def mutate(parts):
+            name = chart_part_for_slide(parts, 64)
+            root = etree.fromstring(parts[name])
+            dlbl = root.find(".//c:dLbl", NS)
+            tx = etree.fromstring(f'<c:tx xmlns:c="{C_NS}" xmlns:a="{A_NS}"><c:rich><a:bodyPr/><a:p><a:r>'
+                                  '<a:t>+15</a:t></a:r></a:p></c:rich></c:tx>')
+            dlbl.find("c:idx", NS).addnext(tx)
+            parts[name] = to_bytes(root)
+
+        report = self.inspect_mutation(mutate)
+        self.assert_has_error(report, "data label(s) with typed-in text")
+
+    def test_text_box_over_chart_is_rejected(self) -> None:
+        def change(root):
+            sp_tree = root.find("p:cSld/p:spTree", NS)
+            box = etree.fromstring(
+                f'<p:sp xmlns:p="{P_NS}" xmlns:a="{A_NS}"><p:nvSpPr><p:cNvPr id="90" name="Label"/>'
+                '<p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/>'
+                '<a:p><a:r><a:t>42</a:t></a:r></a:p></p:txBody></p:sp>')
+            sp_tree.append(box)
+
+        report = self.mutate_xml("ppt/slides/slide49.xml", change)
+        self.assert_has_error(report, "Native chart slide 49 has 1 free-floating shape(s) or text box(es)")
+
     def test_chart_not_bound_to_placeholder_is_rejected(self) -> None:
         def change(root):
             frame = root.find(".//p:graphicFrame", NS)

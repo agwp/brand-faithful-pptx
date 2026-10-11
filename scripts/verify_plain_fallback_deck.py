@@ -376,6 +376,17 @@ def _check_chart_part(slide: int, chart_part: str, parts: dict[str, bytes], over
         _check_descending_bar_order(slide, chart_root, errors)
     if slide == WATERFALL_SLIDE:
         _check_waterfall(slide, chart_root, errors)
+    # Labels must be native: linked to the chart data, never typed-in text.
+    custom_labels = chart_root.findall(".//c:dLbl/c:tx", NS) + chart_root.findall(".//c:dLbls/c:tx", NS)
+    if custom_labels:
+        errors.append(f"Slide {slide} chart {chart_part} has {len(custom_labels)} data label(s) with typed-in text; "
+                      "labels must show the chart's own values")
+    if chart_root.findall(".//c:userShapes", NS):
+        errors.append(f"Slide {slide} chart {chart_part} draws shapes or text boxes inside the chart")
+    for series in chart_root.findall(".//c:ser", NS):
+        for ref in series.findall("c:val/c:numRef", NS) + series.findall("c:yVal/c:numRef", NS):
+            if ref.find("c:f", NS) is None:
+                errors.append(f"Slide {slide} chart {chart_part} has series values not linked to the workbook")
     if slide == 65:
         for series in chart_root.findall(".//c:scatterChart/c:ser", NS):
             if series.find("c:spPr/a:ln/a:noFill", NS) is None:
@@ -602,6 +613,12 @@ def inspect_deck(path: Path) -> dict[str, Any]:
         chart_rels = [r for r in slide_rels if r.get("Type") == CHART_REL]
         chart_refs = slide_root.findall(".//c:chart", NS)
         if index in NATIVE_CHART_SLIDES:
+            overlays = [shape for shape in slide_root.findall(".//p:sp", NS) + slide_root.findall(".//p:cxnSp", NS)
+                        + slide_root.findall(".//p:grpSp", NS)
+                        if shape.find(".//p:nvPr/p:ph", NS) is None]
+            if overlays:
+                errors.append(f"Native chart slide {index} has {len(overlays)} free-floating shape(s) or text box(es); "
+                              "chart labels and annotations must come from the chart itself or a placeholder")
             if len(chart_rels) != 1 or len(chart_refs) != 1:
                 errors.append(f"Native chart slide {index} must contain one chart relationship and one chart frame; "
                               f"found {len(chart_rels)} and {len(chart_refs)}")
