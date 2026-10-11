@@ -2,6 +2,20 @@
 
 All recipes create editable PowerPoint charts with embedded Excel workbook data. Import only the chart-data class that matches the chart type.
 
+## Restrained chart defaults
+
+- Do not add a chart title when the slide title already identifies the measure.
+- Do not add axis titles unless the units or measure would otherwise be ambiguous.
+- Remove major and minor gridlines by default.
+- For columns, bars, and ranked charts, use direct value labels and hide the value axis when the labels carry the complete scale.
+- Sort horizontal bar categories by the relevant value or stacked total, highest to lowest, and reverse the category axis so the largest bar appears at the top of the slide.
+- Put labels outside the end of ordinary columns and bars; put them inside pie, donut, and stacked segments when they remain legible.
+- Keep axes for line, area, combination, scatter, and bubble charts when the audience needs the continuous scale.
+- Keep a legend only when multiple series cannot be identified directly. Never show a legend that duplicates direct labels.
+- Do not use 3-D effects, decorative backgrounds, shadows, or images as chart substitutes.
+- Do not hard-code series or label colours. Leave series fills unset so they come from the theme accents. When labels sit inside filled bars or segments, colour them with a theme colour such as `bg1`.
+- A waterfall built from a stacked column chart uses four series: an invisible `Base` with no fill and no labels, then `Total`, `Increase` and `Decrease`. Colour them with theme colours, for example totals as a 50% shade of `bg1` (neutral grey) and increases and decreases as `accent1` and `accent2`, so the chart recolours with the destination theme. Store each change as its real magnitude and add the sign with the label number format (`+#,##0;;;` and `-#,##0;;;`; the empty sections hide zero labels). Check that the start plus the changes equals the final value. Hide the `Base` legend entry.
+
 ## Category column or bar chart
 
 ```python

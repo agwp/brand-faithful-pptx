@@ -8,6 +8,46 @@ Many AI tools create slides by drawing new shapes, choosing new colors, or expor
 
 The result should be a deck that feels like it belongs to the organization that owns the template. A future editor should be able to open the file in PowerPoint, reuse normal slide layouts, and right-click a chart to edit its data in Excel instead of being stuck with a static SVG, PNG, or screenshot.
 
+## Content before layout
+
+The skill does not treat every placeholder as a slot that must be filled. It selects a layout for the title, text, data, and images that actually exist, then leaves unused optional placeholders empty. It does not invent kickers, straplines, generic subtitles, unsupported takeaways, or unnecessary image captions to make a layout look complete.
+
+Fixed master and layout elements such as logos, footer rules, slide numbers, and approved labels remain intact. New header, footer, confidentiality, caption, or callout copy is added only when supplied, directly supported, functionally required, or explicitly requested.
+
+User-approved fallback layouts follow the same rules. Having more layouts available does not broaden the source material, and chart layouts remain plain: chart furniture and commentary are included only when they make the supplied data easier to understand.
+
+## Opt-in fallback layout catalog
+
+[`references/plain-fallback-layouts.pptx`](references/plain-fallback-layouts.pptx) contains one genuine PowerPoint slide master, 28 reusable slide layouts and 100 example slides, one for each slide type requested in issue #3. [`references/plain-fallback-catalog.json`](references/plain-fallback-catalog.json) maps each slide type to its example slide and layout. It is a plain starting point for cases where an audited corporate template has no suitable official layout. It must not be used, merged, or restyled without explicit user approval; official template layouts remain the default.
+
+### Built to be pasted into a corporate deck
+
+The examples are meant to be copied into a corporate presentation and pasted with **Use Destination Theme**, so that they take on the destination's fonts, colours and layouts. The deck is built for that:
+
+- **Standard layout names and types.** The nine core layouts use PowerPoint's own names and types: `Title Slide`, `Title and Content`, `Section Header`, `Two Content`, `Comparison`, `Title Only`, `Blank`, `Content with Caption` and `Picture with Caption`. A pasted slide maps onto the corporate template's equivalent layout. The 19 custom layouts exist only where the structure differs materially, such as statistics, picture grids, quotes and narrow/wide splits.
+- **Placeholders only.** Layouts and the master contain no rules, bars, panels or images. Picture placeholders are left empty.
+- **Inherited styling.** Text styles use the theme fonts (`+mj-lt`, `+mn-lt`) and theme colours. No RGB value or typeface name appears below the theme, and placeholder text on the example slides carries no size, colour or font overrides.
+- **Charts and tables in content placeholders.** Charts and tables sit inside the `Title and Content` placeholder, as PowerPoint does when you insert them, so they land in the destination's content area.
+- **Theme-coloured charts and diagrams.** Native charts take their series colours from the theme accents. Process, organization, timeline, pyramid and treemap examples are native shapes coloured with theme colours, so they recolour with the destination theme.
+
+The chart examples are restrained native PowerPoint charts with embedded Excel workbooks. They omit chart titles, axis titles and gridlines, use direct data labels instead of a value axis where the labels carry the scale, and show a legend only when several series need one. Office extended chart types (treemap, map, funnel, waterfall) cannot be created safely by `python-pptx`. The waterfall and funnel are built as native bar charts, the treemap as theme-coloured shapes with proportional areas, the heatmap as a table, and the map example leaves its content placeholder empty for a map chart or picture.
+
+Rebuild and verify the catalog with:
+
+```bash
+python3 scripts/build_plain_fallback_deck.py
+python3 scripts/verify_plain_fallback_deck.py references/plain-fallback-layouts.pptx
+python3 scripts/verify_native_charts.py references/plain-fallback-layouts.pptx
+python3 scripts/inspect_template.py references/plain-fallback-layouts.pptx \
+  --format markdown \
+  --role-overrides references/plain-fallback-placeholder-roles.json
+python3 -m unittest discover -s tests
+```
+
+The build also regenerates `plain-fallback-placeholder-roles.json` and `plain-fallback-catalog.json`.
+
+For visual QA, render the deck twice: once as built, and once after replacing the theme's colours and fonts with deliberately different values. Every title, text block, chart, table and diagram should change with the theme. Anything that stays the same is hard-coded and will look off-brand after a paste.
+
 ## Recommended set up for local use
 
 1. Download this repo to use locally.
