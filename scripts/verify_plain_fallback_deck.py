@@ -321,33 +321,60 @@ def _check_descending_bar_order(slide: int, chart_root: etree._Element, errors: 
         errors.append(f"Slide {slide} horizontal bar categories are not sorted highest-to-lowest: {totals!r}")
 
 
+def _series_name(series: etree._Element) -> str:
+    cached = series.find("c:tx/c:strRef/c:strCache/c:pt/c:v", NS)
+    if cached is not None and cached.text:
+        return cached.text
+    literal = series.find("c:tx/c:v", NS)
+    return literal.text if literal is not None and literal.text else ""
+
+
 def _check_waterfall(slide: int, chart_root: etree._Element, errors: list[str]) -> None:
-    series = chart_root.findall(".//c:barChart/c:ser", NS)
-    if len(series) != 2:
-        errors.append(f"Waterfall slide {slide} must have an invisible base series and a movement series")
+    """Base (invisible), Total, Increase and Decrease series that add up, in theme colours."""
+
+    series = {_series_name(s): s for s in chart_root.findall(".//c:barChart/c:ser", NS)}
+    required = ("Base", "Total", "Increase", "Decrease")
+    missing = [name for name in required if name not in series]
+    if missing:
+        errors.append(f"Waterfall slide {slide} lacks series {missing!r}; expected Base, Total, Increase and Decrease")
         return
-    base, movement = series
-    fill = base.find("c:spPr/a:noFill", NS)
-    if fill is None:
+    base = series["Base"]
+    if base.find("c:spPr/a:noFill", NS) is None:
         errors.append(f"Waterfall slide {slide} base series must have no fill")
     base_labels = base.find("c:dLbls/c:showVal", NS)
     if base_labels is not None and base_labels.get("val") == "1":
         errors.append(f"Waterfall slide {slide} labels its invisible base series")
-    movement_labels = movement.find("c:dLbls/c:showVal", NS)
-    if movement_labels is None or movement_labels.get("val") != "1":
-        errors.append(f"Waterfall slide {slide} must label its movement series")
-    base_values, moves = _series_values(base), _series_values(movement)
-    if len(base_values) < 3 or len(base_values) != len(moves):
+    for name in ("Total", "Increase", "Decrease"):
+        ser = series[name]
+        if ser.find("c:spPr/a:solidFill/a:schemeClr", NS) is None:
+            errors.append(f"Waterfall slide {slide} {name} series must use a theme colour fill")
+        shown = ser.find("c:dLbls/c:showVal", NS)
+        if shown is None or shown.get("val") != "1":
+            errors.append(f"Waterfall slide {slide} must label its {name} series")
+    fills = {name: etree.tostring(series[name].find("c:spPr/a:solidFill", NS))
+             for name in ("Total", "Increase", "Decrease") if series[name].find("c:spPr/a:solidFill", NS) is not None}
+    if len(set(fills.values())) != len(fills):
+        errors.append(f"Waterfall slide {slide} uses the same colour for totals, increases and decreases")
+
+    base_v, total_v, inc_v, dec_v = (_series_values(series[name]) for name in required)
+    if len({len(base_v), len(total_v), len(inc_v), len(dec_v)}) != 1 or len(base_v) < 3:
         errors.append(f"Waterfall slide {slide} has incomplete cached values")
         return
-    start, end, steps = moves[0], moves[-1], moves[1:-1]
-    if abs(start + sum(steps) - end) > 1e-6:
-        errors.append(f"Waterfall slide {slide} does not add up: {start} + {steps} != {end}")
+    if not any(value > 0 for value in inc_v) or not any(value > 0 for value in dec_v):
+        errors.append(f"Waterfall slide {slide} must show at least one increase and one decrease")
+    start, end = total_v[0], total_v[-1]
     running = start
-    for base_value, step in zip(base_values[1:-1], steps):
-        if abs(base_value - running) > 1e-6:
-            errors.append(f"Waterfall slide {slide} base {base_value} does not match running total {running}")
-        running += step
+    for i in range(1, len(base_v) - 1):
+        if total_v[i]:
+            errors.append(f"Waterfall slide {slide} has a total value on step {i}")
+        if inc_v[i] and dec_v[i]:
+            errors.append(f"Waterfall slide {slide} step {i} is both an increase and a decrease")
+        after = running + inc_v[i] - dec_v[i]
+        if abs(base_v[i] - min(running, after)) > 1e-6:
+            errors.append(f"Waterfall slide {slide} base {base_v[i]} on step {i} does not match the running total")
+        running = after
+    if abs(running - end) > 1e-6:
+        errors.append(f"Waterfall slide {slide} does not add up: final value {end} but steps give {running}")
 
 
 def _check_chart_part(slide: int, chart_part: str, parts: dict[str, bytes], overrides: dict[str, str],

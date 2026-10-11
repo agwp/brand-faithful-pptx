@@ -938,6 +938,43 @@ def _category(series_names, values, categories=REGIONS, number_format="0") -> Ca
     return data
 
 
+WATERFALL_START = 80
+WATERFALL_STEPS = (("Volume", 15), ("Price", 10), ("Costs", -8))
+WATERFALL_CATEGORIES = ("2025 profit",) + tuple(name for name, _ in WATERFALL_STEPS) + ("2026 profit",)
+# Theme-linked fills, so the waterfall recolours with the destination theme:
+# totals use a neutral grey (50% shade of the background colour), increases accent 1,
+# decreases accent 2.
+WATERFALL_FILLS = {
+    "Total": ("bg1", '<a:lumMod val="50000"/>'),
+    "Increase": ("accent1", ""),
+    "Decrease": ("accent2", ""),
+}
+
+
+def waterfall_series(start: float, steps) -> tuple[tuple[str, tuple[float, ...]], ...]:
+    """Stacked-column waterfall: an invisible base plus Total, Increase and Decrease series.
+
+    Every value is the real magnitude from the source data, so the chart's
+    native labels show true figures and the embedded workbook stays editable.
+    """
+
+    base, total, increase, decrease = [0.0], [float(start)], [0.0], [0.0]
+    running = float(start)
+    for _, change in steps:
+        after = running + change
+        base.append(min(running, after))
+        total.append(0.0)
+        increase.append(float(change) if change > 0 else 0.0)
+        decrease.append(float(-change) if change < 0 else 0.0)
+        running = after
+    base.append(0.0)
+    total.append(running)
+    increase.append(0.0)
+    decrease.append(0.0)
+    return (("Base", tuple(base)), ("Total", tuple(total)), ("Increase", tuple(increase)),
+            ("Decrease", tuple(decrease)))
+
+
 def chart_definition(number: int):
     actual_target = ("Actual", "Target")
     if number in (49, 54):
@@ -977,10 +1014,9 @@ def chart_definition(number: int):
                                                      categories=MONTHS)
     if number == 64:
         data = CategoryChartData(number_format="0")
-        data.categories = ["2025 profit", "Volume", "Price", "Costs", "2026 profit"]
-        # Invisible base + visible movement: 80 + 15 + 10 + 12 = 117.
-        data.add_series("Base", (0, 80, 95, 105, 0))
-        data.add_series("Movement", (80, 15, 10, 12, 117))
+        data.categories = list(WATERFALL_CATEGORIES)
+        for name, values in waterfall_series(WATERFALL_START, WATERFALL_STEPS):
+            data.add_series(name, values)
         return XL_CHART_TYPE.COLUMN_STACKED, data
     if number == 65:
         data = XyChartData(number_format="0")
@@ -1052,6 +1088,17 @@ def _set_series_no_fill(ser: etree._Element) -> None:
     (tx if tx is not None else ser.find("c:order", NS)).addnext(sp_pr)
 
 
+def _set_series_fill(ser: etree._Element, scheme: str, modifiers: str = "") -> None:
+    sp_pr = ser.find("c:spPr", NS)
+    if sp_pr is not None:
+        ser.remove(sp_pr)
+    sp_pr = etree.fromstring(
+        f'<c:spPr xmlns:c="{C_NS}" xmlns:a="{A_NS}"><a:solidFill><a:schemeClr val="{scheme}">{modifiers}'
+        '</a:schemeClr></a:solidFill><a:ln><a:noFill/></a:ln></c:spPr>')
+    tx = ser.find("c:tx", NS)
+    (tx if tx is not None else ser.find("c:order", NS)).addnext(sp_pr)
+
+
 def _remove_plot_dlbls(chart_space: etree._Element) -> None:
     for plot in chart_space.iterfind(".//c:plotArea/*", NS):
         dlbls = plot.find("c:dLbls", NS)
@@ -1113,10 +1160,21 @@ def style_chart(chart, number: int) -> None:
         return
 
     if number == 64:
-        base, movement = series_elements
+        base, total, increase, decrease = series_elements
         _set_series_no_fill(base)
-        _set_series_dlbls(movement, _dlbls_xml(position="ctr", light_text=True, number_format="0",
-                                               per_point_formats={1: "+0;-0;0", 2: "+0;-0;0", 3: "+0;-0;0"}))
+        for ser, (scheme, mods) in zip((total, increase, decrease), WATERFALL_FILLS.values()):
+            _set_series_fill(ser, scheme, mods)
+        # Zero-height points get no label (empty format sections); signs are
+        # added by the number format, so the labels stay linked to the data.
+        _set_series_dlbls(total, _dlbls_xml(position="ctr", light_text=True, number_format="#,##0;;;"))
+        _set_series_dlbls(increase, _dlbls_xml(position="ctr", light_text=True, number_format="+#,##0;;;"))
+        _set_series_dlbls(decrease, _dlbls_xml(position="ctr", light_text=True, number_format="-#,##0;;;"))
+        chart.has_legend = True
+        chart.legend.position = XL_LEGEND_POSITION.BOTTOM
+        chart.legend.include_in_layout = False
+        legend_pos = chart_space.find(".//c:legend/c:legendPos", NS)
+        legend_pos.addnext(etree.fromstring(
+            f'<c:legendEntry xmlns:c="{C_NS}"><c:idx val="0"/><c:delete val="1"/></c:legendEntry>'))
         gap = chart_space.find(".//c:barChart/c:gapWidth", NS)
         if gap is not None:
             gap.set("val", "60")

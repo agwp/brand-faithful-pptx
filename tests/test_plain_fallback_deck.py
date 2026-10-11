@@ -282,27 +282,54 @@ class PlainFallbackVerifierTests(unittest.TestCase):
         report = self.inspect_mutation(mutate)
         self.assert_has_error(report, "horizontal bar categories are not sorted highest-to-lowest")
 
+    def _waterfall_series(self, root):
+        return {verifier._series_name(s): s for s in root.findall(".//c:barChart/c:ser", NS)}
+
     def test_waterfall_that_does_not_add_up_is_rejected(self) -> None:
         def mutate(parts):
             name = chart_part_for_slide(parts, 64)
             root = etree.fromstring(parts[name])
-            series = root.findall(".//c:barChart/c:ser", NS)[1]
-            series.find("c:val/c:numRef/c:numCache/c:pt[@idx='4']/c:v", NS).text = "102"
+            total = self._waterfall_series(root)["Total"]
+            total.find("c:val/c:numRef/c:numCache/c:pt[@idx='4']/c:v", NS).text = "117"
             parts[name] = to_bytes(root)
 
         report = self.inspect_mutation(mutate)
         self.assert_has_error(report, "does not add up")
 
+    def test_waterfall_without_a_decrease_is_rejected(self) -> None:
+        def mutate(parts):
+            name = chart_part_for_slide(parts, 64)
+            root = etree.fromstring(parts[name])
+            decrease = self._waterfall_series(root)["Decrease"]
+            for value in decrease.findall("c:val/c:numRef/c:numCache/c:pt/c:v", NS):
+                value.text = "0"
+            parts[name] = to_bytes(root)
+
+        report = self.inspect_mutation(mutate)
+        self.assert_has_error(report, "must show at least one increase and one decrease")
+
     def test_waterfall_base_labels_are_rejected(self) -> None:
         def mutate(parts):
             name = chart_part_for_slide(parts, 64)
             root = etree.fromstring(parts[name])
-            base, movement = root.findall(".//c:barChart/c:ser", NS)
-            base.find("c:spPr", NS).addnext(copy.deepcopy(movement.find("c:dLbls", NS)))
+            series = self._waterfall_series(root)
+            series["Base"].find("c:spPr", NS).addnext(copy.deepcopy(series["Increase"].find("c:dLbls", NS)))
             parts[name] = to_bytes(root)
 
         report = self.inspect_mutation(mutate)
         self.assert_has_error(report, "labels its invisible base series")
+
+    def test_waterfall_without_theme_colours_is_rejected(self) -> None:
+        def mutate(parts):
+            name = chart_part_for_slide(parts, 64)
+            root = etree.fromstring(parts[name])
+            decrease = self._waterfall_series(root)["Decrease"]
+            scheme = decrease.find("c:spPr/a:solidFill/a:schemeClr", NS)
+            scheme.getparent().replace(scheme, etree.Element(qname(A_NS, "srgbClr"), val="C00000"))
+            parts[name] = to_bytes(root)
+
+        report = self.inspect_mutation(mutate)
+        self.assert_has_error(report, "Decrease series must use a theme colour fill")
 
     def test_scatter_with_connecting_line_is_rejected(self) -> None:
         def mutate(parts):
@@ -328,10 +355,13 @@ class PlainFallbackVerifierTests(unittest.TestCase):
         def mutate(parts):
             name = chart_part_for_slide(parts, 64)
             root = etree.fromstring(parts[name])
-            dlbl = root.find(".//c:dLbl", NS)
-            tx = etree.fromstring(f'<c:tx xmlns:c="{C_NS}" xmlns:a="{A_NS}"><c:rich><a:bodyPr/><a:p><a:r>'
-                                  '<a:t>+15</a:t></a:r></a:p></c:rich></c:tx>')
-            dlbl.find("c:idx", NS).addnext(tx)
+            dlbls = root.find(".//c:ser/c:dLbls", NS)
+            dlbl = etree.fromstring(
+                f'<c:dLbl xmlns:c="{C_NS}" xmlns:a="{A_NS}"><c:idx val="1"/><c:tx><c:rich><a:bodyPr/><a:p><a:r>'
+                '<a:t>+15</a:t></a:r></a:p></c:rich></c:tx><c:showLegendKey val="0"/><c:showVal val="1"/>'
+                '<c:showCatName val="0"/><c:showSerName val="0"/><c:showPercent val="0"/>'
+                '<c:showBubbleSize val="0"/></c:dLbl>')
+            dlbls.insert(0, dlbl)
             parts[name] = to_bytes(root)
 
         report = self.inspect_mutation(mutate)

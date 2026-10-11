@@ -14,7 +14,7 @@ All recipes create editable PowerPoint charts with embedded Excel workbook data.
 - Keep a legend only when multiple series cannot be identified directly. Never show a legend that duplicates direct labels.
 - Do not use 3-D effects, decorative backgrounds, shadows, or images as chart substitutes.
 - Do not hard-code series or label colours. Leave series fills unset so they come from the theme accents. When labels sit inside filled bars or segments, colour them with a theme colour such as `bg1`.
-- A waterfall built from a stacked column chart needs an invisible base series with no fill and no labels. Label only the movement series, and check that the start plus the movements equals the end.
+- A waterfall built from a stacked column chart uses four series: an invisible `Base` with no fill and no labels, then `Total`, `Increase` and `Decrease`. Colour them with theme colours, for example totals as a 50% shade of `bg1` (neutral grey) and increases and decreases as `accent1` and `accent2`, so the chart recolours with the destination theme. Store each change as its real magnitude and add the sign with the label number format (`+#,##0;;;` and `-#,##0;;;`; the empty sections hide zero labels). Check that the start plus the changes equals the final value. Hide the `Base` legend entry.
 
 ## Category column or bar chart
 
