@@ -13,6 +13,8 @@ All recipes create editable PowerPoint charts with embedded Excel workbook data.
 - Keep axes for line, area, combination, scatter, and bubble charts when the audience needs the continuous scale.
 - Keep a legend only when multiple series cannot be identified directly. Never show a legend that duplicates direct labels.
 - Do not use 3-D effects, decorative backgrounds, shadows, or images as chart substitutes.
+- Do not hard-code series or label colours. Leave series fills unset so they come from the theme accents. When labels sit inside filled bars or segments, colour them with a theme colour such as `bg1`.
+- A waterfall built from a stacked column chart needs an invisible base series with no fill and no labels. Label only the movement series, and check that the start plus the movements equals the end.
 
 ## Category column or bar chart
 

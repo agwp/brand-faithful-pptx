@@ -1,110 +1,383 @@
 {
   "version": 1,
   "overrides": {
-    "6:11": {
-      "layout_name": "Agenda with progress indicator",
-      "placeholder_name": "Section label 11",
-      "content_role": "section_label",
+    "1:1": {
+      "layout_name": "Title and Content",
+      "placeholder_name": "Content Placeholder 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "2:1": {
+      "layout_name": "Section Header",
+      "placeholder_name": "Text Placeholder 2",
+      "content_role": "subtitle",
       "content_class": "optional_supporting",
-      "note": "Use only for a supplied or functionally required current-section label."
+      "note": "Use only for a supplied section number or short description."
     },
-    "9:10": {
-      "layout_name": "Numbered chapter divider",
-      "placeholder_name": "Section label 10",
-      "content_role": "section_label",
+    "3:1": {
+      "layout_name": "Two Content",
+      "placeholder_name": "Content Placeholder 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "3:2": {
+      "layout_name": "Two Content",
+      "placeholder_name": "Content Placeholder 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "4:1": {
+      "layout_name": "Comparison",
+      "placeholder_name": "Heading 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Use only for supplied content."
+    },
+    "4:2": {
+      "layout_name": "Comparison",
+      "placeholder_name": "Content Placeholder 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "4:3": {
+      "layout_name": "Comparison",
+      "placeholder_name": "Heading 4",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Use only for supplied content."
+    },
+    "4:4": {
+      "layout_name": "Comparison",
+      "placeholder_name": "Content Placeholder 5",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "7:1": {
+      "layout_name": "Content with Caption",
+      "placeholder_name": "Content Placeholder 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "7:2": {
+      "layout_name": "Content with Caption",
+      "placeholder_name": "Text Placeholder 3",
+      "content_role": "caption",
       "content_class": "optional_supporting",
-      "note": "Use only for an actual chapter or section number."
+      "note": "Use only for a supplied caption, explanation or annotation."
     },
-    "16:10": {
-      "layout_name": "Title and content slide",
-      "placeholder_name": "Editable content 10",
-      "content_role": "body_content",
-      "content_class": "core_content",
-      "note": "Primary supplied content region; it is not a requirement to add text."
+    "8:2": {
+      "layout_name": "Picture with Caption",
+      "placeholder_name": "Text Placeholder 3",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for a supplied caption, explanation or annotation."
     },
-    "17:11": {
-      "layout_name": "Title, subtitle and content slide",
-      "placeholder_name": "Editable content 11",
-      "content_role": "body_content",
-      "content_class": "core_content",
-      "note": "Primary supplied content region; it is not a requirement to add text."
-    },
-    "19:11": {
-      "layout_name": "Title with left third and right two-thirds",
-      "placeholder_name": "Editable content 11",
-      "content_role": "body_content",
-      "content_class": "core_content",
-      "note": "Primary supplied content region for text, data, image, table, or diagram."
-    },
-    "20:10": {
-      "layout_name": "Title with left two-thirds and right third",
-      "placeholder_name": "Editable content 10",
-      "content_role": "body_content",
-      "content_class": "core_content",
-      "note": "Primary supplied content region for text, data, image, table, or diagram."
-    },
-    "28:10": {
-      "layout_name": "Quotation slide",
-      "placeholder_name": "Quote 10",
+    "13:1": {
+      "layout_name": "Quote",
+      "placeholder_name": "Quote 1",
       "content_role": "quote",
       "content_class": "optional_supporting",
       "note": "Use only for a supplied quotation."
     },
-    "28:11": {
-      "layout_name": "Quotation slide",
-      "placeholder_name": "Attribution 11",
+    "13:2": {
+      "layout_name": "Quote",
+      "placeholder_name": "Attribution 2",
       "content_role": "attribution",
       "content_class": "optional_supporting",
       "note": "Use only for the supplied quotation's factual attribution."
     },
-    "29:11": {
-      "layout_name": "Quotation with portrait",
-      "placeholder_name": "Quote 11",
+    "14:2": {
+      "layout_name": "Quote with Picture",
+      "placeholder_name": "Quote 2",
       "content_role": "quote",
       "content_class": "optional_supporting",
       "note": "Use only for a supplied quotation."
     },
-    "29:12": {
-      "layout_name": "Quotation with portrait",
-      "placeholder_name": "Attribution 12",
+    "14:3": {
+      "layout_name": "Quote with Picture",
+      "placeholder_name": "Attribution 3",
       "content_role": "attribution",
       "content_class": "optional_supporting",
       "note": "Use only for the supplied quotation's factual attribution."
     },
-    "46:11": {
-      "layout_name": "Annotated-screenshot slide",
-      "placeholder_name": "Callout 11",
-      "content_role": "callout",
+    "15:1": {
+      "layout_name": "Title, Subtitle and Content",
+      "placeholder_name": "Subtitle 2",
+      "content_role": "subtitle",
       "content_class": "optional_supporting",
-      "note": "Use only for factual annotations supported by the supplied screenshot or source."
+      "note": "Use only for supplied context, such as a measure, unit or period."
     },
-    "67:10": {
-      "layout_name": "Treemap slide",
-      "placeholder_name": "Editable content 10",
-      "content_role": "non_text",
-      "content_class": "non_text",
-      "note": "Editable visual region; the example uses native PowerPoint shapes."
+    "15:2": {
+      "layout_name": "Title, Subtitle and Content",
+      "placeholder_name": "Content Placeholder 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
     },
-    "68:10": {
-      "layout_name": "Heatmap slide",
-      "placeholder_name": "Editable content 10",
-      "content_role": "non_text",
-      "content_class": "non_text",
-      "note": "Editable visual region; the example uses native PowerPoint shapes and labels."
+    "16:1": {
+      "layout_name": "Two Content, Narrow Left",
+      "placeholder_name": "Content Placeholder 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
     },
-    "69:10": {
-      "layout_name": "Geographic-map slide",
-      "placeholder_name": "Editable content 10",
-      "content_role": "non_text",
-      "content_class": "non_text",
-      "note": "Editable visual region; the example uses native PowerPoint region tiles."
+    "16:2": {
+      "layout_name": "Two Content, Narrow Left",
+      "placeholder_name": "Content Placeholder 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
     },
-    "71:11": {
-      "layout_name": "Chart with takeaway panel",
-      "placeholder_name": "Callout 11",
-      "content_role": "callout",
+    "17:1": {
+      "layout_name": "Two Content, Narrow Right",
+      "placeholder_name": "Content Placeholder 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "17:2": {
+      "layout_name": "Two Content, Narrow Right",
+      "placeholder_name": "Content Placeholder 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "18:1": {
+      "layout_name": "Three Content",
+      "placeholder_name": "Content Placeholder 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "18:2": {
+      "layout_name": "Three Content",
+      "placeholder_name": "Content Placeholder 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "18:3": {
+      "layout_name": "Three Content",
+      "placeholder_name": "Content Placeholder 4",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "19:1": {
+      "layout_name": "Four Content",
+      "placeholder_name": "Content Placeholder 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "19:2": {
+      "layout_name": "Four Content",
+      "placeholder_name": "Content Placeholder 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "19:3": {
+      "layout_name": "Four Content",
+      "placeholder_name": "Content Placeholder 4",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "19:4": {
+      "layout_name": "Four Content",
+      "placeholder_name": "Content Placeholder 5",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "20:1": {
+      "layout_name": "Four Content Grid",
+      "placeholder_name": "Content Placeholder 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "20:2": {
+      "layout_name": "Four Content Grid",
+      "placeholder_name": "Content Placeholder 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "20:3": {
+      "layout_name": "Four Content Grid",
+      "placeholder_name": "Content Placeholder 4",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "20:4": {
+      "layout_name": "Four Content Grid",
+      "placeholder_name": "Content Placeholder 5",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "21:1": {
+      "layout_name": "Statistic and Description",
+      "placeholder_name": "Statistic 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "First paragraph: supplied figure. Second level: its label or unit."
+    },
+    "21:2": {
+      "layout_name": "Statistic and Description",
+      "placeholder_name": "Content Placeholder 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "Primary region for supplied text, chart, table, picture or media."
+    },
+    "22:1": {
+      "layout_name": "Three Statistics",
+      "placeholder_name": "Statistic 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "First paragraph: supplied figure. Second level: its label or unit."
+    },
+    "22:2": {
+      "layout_name": "Three Statistics",
+      "placeholder_name": "Statistic 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "First paragraph: supplied figure. Second level: its label or unit."
+    },
+    "22:3": {
+      "layout_name": "Three Statistics",
+      "placeholder_name": "Statistic 4",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "First paragraph: supplied figure. Second level: its label or unit."
+    },
+    "23:1": {
+      "layout_name": "Four Statistics",
+      "placeholder_name": "Statistic 2",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "First paragraph: supplied figure. Second level: its label or unit."
+    },
+    "23:2": {
+      "layout_name": "Four Statistics",
+      "placeholder_name": "Statistic 3",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "First paragraph: supplied figure. Second level: its label or unit."
+    },
+    "23:3": {
+      "layout_name": "Four Statistics",
+      "placeholder_name": "Statistic 4",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "First paragraph: supplied figure. Second level: its label or unit."
+    },
+    "23:4": {
+      "layout_name": "Four Statistics",
+      "placeholder_name": "Statistic 5",
+      "content_role": "body_content",
+      "content_class": "core_content",
+      "note": "First paragraph: supplied figure. Second level: its label or unit."
+    },
+    "24:2": {
+      "layout_name": "Two Pictures with Captions",
+      "placeholder_name": "Caption 3",
+      "content_role": "caption",
       "content_class": "optional_supporting",
-      "note": "Use only for a conclusion directly supported by the chart data."
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "24:4": {
+      "layout_name": "Two Pictures with Captions",
+      "placeholder_name": "Caption 5",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "25:2": {
+      "layout_name": "Four Pictures with Captions",
+      "placeholder_name": "Caption 3",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "25:4": {
+      "layout_name": "Four Pictures with Captions",
+      "placeholder_name": "Caption 5",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "25:6": {
+      "layout_name": "Four Pictures with Captions",
+      "placeholder_name": "Caption 7",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "25:8": {
+      "layout_name": "Four Pictures with Captions",
+      "placeholder_name": "Caption 9",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "26:2": {
+      "layout_name": "Six Pictures with Captions",
+      "placeholder_name": "Caption 3",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "26:4": {
+      "layout_name": "Six Pictures with Captions",
+      "placeholder_name": "Caption 5",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "26:6": {
+      "layout_name": "Six Pictures with Captions",
+      "placeholder_name": "Caption 7",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "26:8": {
+      "layout_name": "Six Pictures with Captions",
+      "placeholder_name": "Caption 9",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "26:13": {
+      "layout_name": "Six Pictures with Captions",
+      "placeholder_name": "Caption 11",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "26:15": {
+      "layout_name": "Six Pictures with Captions",
+      "placeholder_name": "Caption 13",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for supplied identification, credit or factual context."
+    },
+    "27:2": {
+      "layout_name": "Picture Left with Caption",
+      "placeholder_name": "Text Placeholder 3",
+      "content_role": "caption",
+      "content_class": "optional_supporting",
+      "note": "Use only for a supplied caption, explanation or annotation."
     }
   }
 }

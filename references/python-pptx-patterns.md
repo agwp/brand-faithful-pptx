@@ -8,7 +8,40 @@
 
 `python-pptx` treats a presentation as a package of parts. Most design information lives in the theme, slide masters, and slide layouts that remain even when a deck has no slides. Starting from `Presentation(template_path)` preserves those parts.
 
-`python-pptx` can read and reuse slide masters and layouts, but its public API cannot create them. The repository's plain fallback catalog therefore creates its 100 layout parts as OOXML first, then reopens that package with `python-pptx` to add examples through the genuine layouts. Do not use that fallback catalog automatically; it requires explicit user approval after the official template has been audited.
+`python-pptx` can read and reuse slide masters and layouts, but its public API cannot create them. The repository's plain fallback catalog therefore creates its 28 layout parts as OOXML first, then reopens that package with `python-pptx` to add 100 examples through the genuine layouts. Do not use that fallback catalog automatically; it requires explicit user approval after the official template has been audited.
+
+## Keep styling inherited
+
+Text, shapes, tables and charts should inherit their look from the layout, master and theme. That way the deck stays on-brand, and slides pasted with *Use Destination Theme* take on the destination brand.
+
+- Write placeholder text without `font.size`, `font.name` or `font.color` overrides.
+- When a shape or table cell needs a colour, use a theme colour, not an RGB value:
+
+```python
+from pptx.enum.dml import MSO_THEME_COLOR
+
+shape.fill.solid()
+shape.fill.fore_color.theme_color = MSO_THEME_COLOR.ACCENT_1
+shape.fill.fore_color.brightness = 0.6  # lighter tint of the same accent
+```
+
+- Leave chart series fills unset so PowerPoint takes them from the theme accents.
+
+### Charts and tables in a content placeholder
+
+`python-pptx` can insert charts only into chart placeholders and tables only into table placeholders. Most templates offer content (`obj`) placeholders instead. PowerPoint binds a chart or table to a content placeholder by giving the graphic frame the placeholder's `<p:ph idx>`. You can do the same:
+
+```python
+import copy
+
+placeholder = slide.placeholders[1]
+frame = slide.shapes.add_chart(chart_type, placeholder.left, placeholder.top,
+                               placeholder.width, placeholder.height, chart_data)
+ph = placeholder._element.find(".//{http://schemas.openxmlformats.org/presentationml/2006/main}ph")
+frame._element.nvGraphicFramePr.nvPr.insert(0, copy.deepcopy(ph))
+placeholder._element.addprevious(frame._element)
+placeholder._element.getparent().remove(placeholder._element)
+```
 
 ## Layout selection
 

@@ -1,0 +1,847 @@
+{
+  "description": "Issue #3 slide types mapped to the fallback deck's example slides and layouts.",
+  "layouts": [
+    {
+      "name": "Title Slide",
+      "type": "title",
+      "standard_office_layout": true
+    },
+    {
+      "name": "Title and Content",
+      "type": "obj",
+      "standard_office_layout": true
+    },
+    {
+      "name": "Section Header",
+      "type": "secHead",
+      "standard_office_layout": true
+    },
+    {
+      "name": "Two Content",
+      "type": "twoObj",
+      "standard_office_layout": true
+    },
+    {
+      "name": "Comparison",
+      "type": "twoTxTwoObj",
+      "standard_office_layout": true
+    },
+    {
+      "name": "Title Only",
+      "type": "titleOnly",
+      "standard_office_layout": true
+    },
+    {
+      "name": "Blank",
+      "type": "blank",
+      "standard_office_layout": true
+    },
+    {
+      "name": "Content with Caption",
+      "type": "objTx",
+      "standard_office_layout": true
+    },
+    {
+      "name": "Picture with Caption",
+      "type": "picTx",
+      "standard_office_layout": true
+    },
+    {
+      "name": "Title Slide with Picture",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Title Slide with Side Picture",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Title and Full Picture",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Statement",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Quote",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Quote with Picture",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Title, Subtitle and Content",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Two Content, Narrow Left",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Two Content, Narrow Right",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Three Content",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Four Content",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Four Content Grid",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Statistic and Description",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Three Statistics",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Four Statistics",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Two Pictures with Captions",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Four Pictures with Captions",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Six Pictures with Captions",
+      "type": "cust",
+      "standard_office_layout": false
+    },
+    {
+      "name": "Picture Left with Caption",
+      "type": "cust",
+      "standard_office_layout": false
+    }
+  ],
+  "entries": [
+    {
+      "slide": 1,
+      "name": "Standard title slide",
+      "category": "Opening and navigation",
+      "layout": "Title Slide",
+      "example": "text"
+    },
+    {
+      "slide": 2,
+      "name": "Hero-image title slide",
+      "category": "Opening and navigation",
+      "layout": "Title Slide with Picture",
+      "example": "text"
+    },
+    {
+      "slide": 3,
+      "name": "Split-panel title slide",
+      "category": "Opening and navigation",
+      "layout": "Title Slide with Side Picture",
+      "example": "text"
+    },
+    {
+      "slide": 4,
+      "name": "Minimal title slide",
+      "category": "Opening and navigation",
+      "layout": "Title Slide",
+      "example": "text"
+    },
+    {
+      "slide": 5,
+      "name": "Event or webinar title slide",
+      "category": "Opening and navigation",
+      "layout": "Title Slide",
+      "example": "text"
+    },
+    {
+      "slide": 6,
+      "name": "Agenda slide",
+      "category": "Opening and navigation",
+      "layout": "Title and Content",
+      "example": "text"
+    },
+    {
+      "slide": 7,
+      "name": "Agenda with progress indicator",
+      "category": "Opening and navigation",
+      "layout": "Title and Content",
+      "example": "text"
+    },
+    {
+      "slide": 8,
+      "name": "Standard section divider",
+      "category": "Opening and navigation",
+      "layout": "Section Header",
+      "example": "text"
+    },
+    {
+      "slide": 9,
+      "name": "Image-led section divider",
+      "category": "Opening and navigation",
+      "layout": "Title and Full Picture",
+      "example": "text"
+    },
+    {
+      "slide": 10,
+      "name": "Numbered chapter divider",
+      "category": "Opening and navigation",
+      "layout": "Section Header",
+      "example": "text"
+    },
+    {
+      "slide": 11,
+      "name": "Single-speaker slide",
+      "category": "People and organization",
+      "layout": "Picture with Caption",
+      "example": "text"
+    },
+    {
+      "slide": 12,
+      "name": "Two-speaker slide",
+      "category": "People and organization",
+      "layout": "Two Pictures with Captions",
+      "example": "text"
+    },
+    {
+      "slide": 13,
+      "name": "Panel-speaker slide",
+      "category": "People and organization",
+      "layout": "Four Pictures with Captions",
+      "example": "text"
+    },
+    {
+      "slide": 14,
+      "name": "Team grid slide",
+      "category": "People and organization",
+      "layout": "Six Pictures with Captions",
+      "example": "text"
+    },
+    {
+      "slide": 15,
+      "name": "Executive biography slide",
+      "category": "People and organization",
+      "layout": "Picture with Caption",
+      "example": "text"
+    },
+    {
+      "slide": 16,
+      "name": "Title-only slide",
+      "category": "Core content",
+      "layout": "Title Only",
+      "example": "text"
+    },
+    {
+      "slide": 17,
+      "name": "Title and content slide",
+      "category": "Core content",
+      "layout": "Title and Content",
+      "example": "text"
+    },
+    {
+      "slide": 18,
+      "name": "Title, subtitle and content slide",
+      "category": "Core content",
+      "layout": "Title, Subtitle and Content",
+      "example": "text"
+    },
+    {
+      "slide": 19,
+      "name": "Title and two columns",
+      "category": "Core content",
+      "layout": "Two Content",
+      "example": "text"
+    },
+    {
+      "slide": 20,
+      "name": "Title with left third and right two-thirds",
+      "category": "Core content",
+      "layout": "Two Content, Narrow Left",
+      "example": "text"
+    },
+    {
+      "slide": 21,
+      "name": "Title with left two-thirds and right third",
+      "category": "Core content",
+      "layout": "Two Content, Narrow Right",
+      "example": "text"
+    },
+    {
+      "slide": 22,
+      "name": "Title and three columns",
+      "category": "Core content",
+      "layout": "Three Content",
+      "example": "text"
+    },
+    {
+      "slide": 23,
+      "name": "Title and four-card grid",
+      "category": "Core content",
+      "layout": "Four Content",
+      "example": "text"
+    },
+    {
+      "slide": 24,
+      "name": "50:50 stat and description",
+      "category": "Core content",
+      "layout": "Statistic and Description",
+      "example": "text"
+    },
+    {
+      "slide": 25,
+      "name": "Big-statement slide",
+      "category": "Core content",
+      "layout": "Statement",
+      "example": "text"
+    },
+    {
+      "slide": 26,
+      "name": "Single callout-stat slide",
+      "category": "Core content",
+      "layout": "Statistic and Description",
+      "example": "text"
+    },
+    {
+      "slide": 27,
+      "name": "Three-stat row",
+      "category": "Core content",
+      "layout": "Three Statistics",
+      "example": "text"
+    },
+    {
+      "slide": 28,
+      "name": "Definition or explainer slide",
+      "category": "Core content",
+      "layout": "Two Content, Narrow Left",
+      "example": "text"
+    },
+    {
+      "slide": 29,
+      "name": "Quotation slide",
+      "category": "Core content",
+      "layout": "Quote",
+      "example": "text"
+    },
+    {
+      "slide": 30,
+      "name": "Quotation with portrait",
+      "category": "Core content",
+      "layout": "Quote with Picture",
+      "example": "text"
+    },
+    {
+      "slide": 31,
+      "name": "Key-takeaways slide",
+      "category": "Core content",
+      "layout": "Title and Content",
+      "example": "text"
+    },
+    {
+      "slide": 32,
+      "name": "Executive-summary slide",
+      "category": "Core content",
+      "layout": "Three Content",
+      "example": "text"
+    },
+    {
+      "slide": 33,
+      "name": "Recommendation and rationale slide",
+      "category": "Core content",
+      "layout": "Two Content, Narrow Left",
+      "example": "text"
+    },
+    {
+      "slide": 34,
+      "name": "Side-by-side comparison slide",
+      "category": "Core content",
+      "layout": "Comparison",
+      "example": "text"
+    },
+    {
+      "slide": 35,
+      "name": "Pros and cons slide",
+      "category": "Core content",
+      "layout": "Comparison",
+      "example": "text"
+    },
+    {
+      "slide": 36,
+      "name": "Before-and-after slide",
+      "category": "Core content",
+      "layout": "Two Pictures with Captions",
+      "example": "text"
+    },
+    {
+      "slide": 37,
+      "name": "Problem-and-solution slide",
+      "category": "Core content",
+      "layout": "Comparison",
+      "example": "text"
+    },
+    {
+      "slide": 38,
+      "name": "Challenge, approach and result slide",
+      "category": "Core content",
+      "layout": "Three Content",
+      "example": "text"
+    },
+    {
+      "slide": 39,
+      "name": "Customer-proof slide",
+      "category": "Core content",
+      "layout": "Picture with Caption",
+      "example": "text"
+    },
+    {
+      "slide": 40,
+      "name": "Frequently asked questions slide",
+      "category": "Core content",
+      "layout": "Two Content",
+      "example": "text"
+    },
+    {
+      "slide": 41,
+      "name": "Question or discussion-prompt slide",
+      "category": "Visual, product and media",
+      "layout": "Statement",
+      "example": "text"
+    },
+    {
+      "slide": 42,
+      "name": "Left image and right text",
+      "category": "Visual, product and media",
+      "layout": "Picture Left with Caption",
+      "example": "text"
+    },
+    {
+      "slide": 43,
+      "name": "Left text and right image",
+      "category": "Visual, product and media",
+      "layout": "Picture with Caption",
+      "example": "text"
+    },
+    {
+      "slide": 44,
+      "name": "Full-bleed image with text overlay",
+      "category": "Visual, product and media",
+      "layout": "Title and Full Picture",
+      "example": "text"
+    },
+    {
+      "slide": 45,
+      "name": "Image-gallery slide",
+      "category": "Visual, product and media",
+      "layout": "Four Pictures with Captions",
+      "example": "text"
+    },
+    {
+      "slide": 46,
+      "name": "Product-screenshot slide",
+      "category": "Visual, product and media",
+      "layout": "Title and Content",
+      "example": "text"
+    },
+    {
+      "slide": 47,
+      "name": "Annotated-screenshot slide",
+      "category": "Visual, product and media",
+      "layout": "Content with Caption",
+      "example": "text"
+    },
+    {
+      "slide": 48,
+      "name": "Video or live-demo slide",
+      "category": "Visual, product and media",
+      "layout": "Title and Content",
+      "example": "text"
+    },
+    {
+      "slide": 49,
+      "name": "One-series column chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 50,
+      "name": "Two-series column chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 51,
+      "name": "Multi-series clustered column chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 52,
+      "name": "Stacked column chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 53,
+      "name": "100% stacked column chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 54,
+      "name": "One-series horizontal bar chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 55,
+      "name": "Two-series horizontal bar chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 56,
+      "name": "Stacked horizontal bar chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 57,
+      "name": "100% stacked horizontal bar chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 58,
+      "name": "Ranked bar chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 59,
+      "name": "Pie chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 60,
+      "name": "Donut chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 61,
+      "name": "Line chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 62,
+      "name": "Area or stacked-area chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 63,
+      "name": "Combination chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 64,
+      "name": "Waterfall chart",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 65,
+      "name": "Scatter-plot slide",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 66,
+      "name": "Bubble-chart slide",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 67,
+      "name": "Funnel-chart slide",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "chart"
+    },
+    {
+      "slide": 68,
+      "name": "Treemap slide",
+      "category": "Chart and data",
+      "layout": "Title Only",
+      "example": "treemap"
+    },
+    {
+      "slide": 69,
+      "name": "Heatmap slide",
+      "category": "Chart and data",
+      "layout": "Title and Content",
+      "example": "heatmap"
+    },
+    {
+      "slide": 70,
+      "name": "Geographic-map slide",
+      "category": "Chart and data",
+      "layout": "Content with Caption",
+      "example": "text"
+    },
+    {
+      "slide": 71,
+      "name": "KPI scorecard or dashboard",
+      "category": "Chart and data",
+      "layout": "Four Statistics",
+      "example": "text"
+    },
+    {
+      "slide": 72,
+      "name": "Chart with takeaway panel",
+      "category": "Chart and data",
+      "layout": "Two Content, Narrow Right",
+      "example": "chart"
+    },
+    {
+      "slide": 73,
+      "name": "Timeline slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 74,
+      "name": "Roadmap slide",
+      "category": "Process and strategy",
+      "layout": "Three Content",
+      "example": "text"
+    },
+    {
+      "slide": 75,
+      "name": "Horizontal-process slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 76,
+      "name": "Vertical-process slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 77,
+      "name": "Chevron-process slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 78,
+      "name": "Circular-process slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 79,
+      "name": "Process-funnel slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 80,
+      "name": "Swimlane-process slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 81,
+      "name": "Workflow or decision-flow slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 82,
+      "name": "Customer-journey slide",
+      "category": "Process and strategy",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 83,
+      "name": "Lifecycle slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 84,
+      "name": "Organizational-chart slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 85,
+      "name": "Ecosystem or network slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 86,
+      "name": "Hierarchy or pyramid slide",
+      "category": "Process and strategy",
+      "layout": "Title Only",
+      "example": "diagram"
+    },
+    {
+      "slide": 87,
+      "name": "Matrix slide",
+      "category": "Process and strategy",
+      "layout": "Four Content Grid",
+      "example": "text"
+    },
+    {
+      "slide": 88,
+      "name": "Basic table slide",
+      "category": "Table and planning",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 89,
+      "name": "Comparison-table slide",
+      "category": "Table and planning",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 90,
+      "name": "Financial-table slide",
+      "category": "Table and planning",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 91,
+      "name": "Project-plan or Gantt slide",
+      "category": "Table and planning",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 92,
+      "name": "Calendar or schedule slide",
+      "category": "Table and planning",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 93,
+      "name": "RACI slide",
+      "category": "Table and planning",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 94,
+      "name": "Risk-register slide",
+      "category": "Table and planning",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 95,
+      "name": "Issue, action and status tracker",
+      "category": "Table and planning",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 96,
+      "name": "Next-steps slide",
+      "category": "Closing and administrative",
+      "layout": "Title and Content",
+      "example": "table"
+    },
+    {
+      "slide": 97,
+      "name": "Q&A slide",
+      "category": "Closing and administrative",
+      "layout": "Statement",
+      "example": "text"
+    },
+    {
+      "slide": 98,
+      "name": "Thank-you and contact slide",
+      "category": "Closing and administrative",
+      "layout": "Title Slide",
+      "example": "text"
+    },
+    {
+      "slide": 99,
+      "name": "Sources, notes and legal slide",
+      "category": "Closing and administrative",
+      "layout": "Title and Content",
+      "example": "text"
+    },
+    {
+      "slide": 100,
+      "name": "Blank branded canvas",
+      "category": "Closing and administrative",
+      "layout": "Blank",
+      "example": "text"
+    }
+  ]
+}

@@ -17,7 +17,14 @@ prs = Presentation(template_path)
 
 Do not recreate the visual system from scratch. Use the template's slide masters, slide layouts, placeholders, theme fonts, theme colors, and existing chart styling. Only use `Presentation()` with no path when the user has not provided a template and no existing deck is being edited.
 
-The plain fallback catalog at `references/plain-fallback-100-layouts.pptx` is opt-in only. Do not use, merge, or adapt its layouts unless the user explicitly approves fallback layout use after the official template has been audited. Official user-provided masters and layouts always take precedence.
+The plain fallback catalog at `references/plain-fallback-layouts.pptx` is opt-in only. Do not use, merge, or adapt its layouts unless the user explicitly approves fallback layout use after the official template has been audited. Official user-provided masters and layouts always take precedence.
+
+When fallback use is approved:
+
+- Look up the slide type in `references/plain-fallback-catalog.json` to find its example slide and layout.
+- If the catalog layout is one of PowerPoint's standard layouts (`Title Slide`, `Title and Content`, `Section Header`, `Two Content`, `Comparison`, `Title Only`, `Blank`, `Content with Caption`, `Picture with Caption`), use the corporate template's layout of the same name instead. Copy only the example's structure, such as the chart type, table shape or diagram arrangement.
+- Only a custom fallback layout should be brought into the corporate deck. Paste the example slide with **Use Destination Theme** so it takes the corporate theme fonts and colours.
+- Never add RGB colours, named typefaces or font-size overrides to make fallback content look right. If it does not look right with inherited styles, choose a different approved layout.
 
 ## Content Discipline
 
@@ -78,6 +85,7 @@ When working from an unpacked package, treat XML and relationship files as sourc
    - Access known placeholders with `slide.placeholders[idx]`; `idx` is stable for that layout.
    - Prefer chart placeholders for charts. `ChartPlaceholder.insert_chart()` preserves the placeholder's position and size.
    - Leave an unused optional placeholder empty. Do not add a freeform text box to compensate for an unsuitable layout when another approved layout fits.
+   - Write text without size, colour or font overrides so it inherits the layout and theme. Use theme colours (`MSO_THEME_COLOR`) rather than RGB values for any shape, table or chart formatting you must set.
 
 4. Use native PowerPoint charts.
    - Create charts with `ChartPlaceholder.insert_chart()` or `slide.shapes.add_chart()`.
@@ -112,7 +120,7 @@ Build and verify the repository's opt-in fallback catalog with:
 
 ```bash
 python scripts/build_plain_fallback_deck.py
-python scripts/verify_plain_fallback_deck.py references/plain-fallback-100-layouts.pptx
+python scripts/verify_plain_fallback_deck.py references/plain-fallback-layouts.pptx
 ```
 
 When a template has no chart placeholder, use the closest content layout and explicit coordinates from the audited placeholder geometry. Keep those coordinates derived from the template, not invented as a new design system.
